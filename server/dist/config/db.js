@@ -15,15 +15,16 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const mongoose_1 = __importDefault(require("mongoose"));
 const dotenv_1 = __importDefault(require("dotenv"));
 dotenv_1.default.config();
-const dbUrl = process.env.DB_URL;
+const DB_URL = process.env.DB_URL;
 const db = {
     dbConnection: () => __awaiter(void 0, void 0, void 0, function* () {
         try {
-            yield mongoose_1.default.connect(`${dbUrl}`);
-            console.log(`connected to ${dbUrl}`);
+            yield mongoose_1.default.connect(`${DB_URL}`);
+            console.log(`connected to ${DB_URL}`);
         }
         catch (error) {
-            throw error;
+            console.error(`Error connecting to the database: ${error}`);
+            process.exit(1);
         }
     }),
     dbOnDisconnect: () => {

@@ -13,7 +13,7 @@ const userRoutes_1 = require("./routes/userRoutes");
 const helmet_1 = __importDefault(require("helmet"));
 dotenv_1.default.config();
 const app = (0, express_1.default)();
-const port = process.env.PORT;
+const PORT = process.env.PORT || 5000;
 db_1.default.dbOnDisconnect();
 app.use((0, helmet_1.default)());
 app.use(express_1.default.json());
@@ -35,12 +35,13 @@ app.use((0, cors_1.default)({
 // app.use(csurf({ cookie: { httpOnly: true } }))
 app.use("/users", userRoutes_1.userRouter);
 app.use(erroHandler_1.erroHandler);
-app.listen(port, () => {
+app.listen(PORT, () => {
     try {
         db_1.default.dbConnection();
-        console.log(`⚡️[server]: Server is running at http://localhost:${port}`);
+        console.log(`⚡️[server]: Server is running at http://localhost:${PORT}`);
     }
     catch (error) {
-        throw error;
+        console.error(`Error starting the server: ${error}`);
+        process.exit(1);
     }
 });

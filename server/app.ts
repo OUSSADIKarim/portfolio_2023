@@ -11,7 +11,7 @@ import helmet from "helmet"
 dotenv.config()
 
 const app: Express = express()
-const port = process.env.PORT
+const PORT = process.env.PORT || 5000
 
 db.dbOnDisconnect()
 
@@ -39,11 +39,12 @@ app.use("/users", userRouter)
 
 app.use(erroHandler)
 
-app.listen(port, () => {
+app.listen(PORT, () => {
   try {
     db.dbConnection()
-    console.log(`⚡️[server]: Server is running at http://localhost:${port}`)
+    console.log(`⚡️[server]: Server is running at http://localhost:${PORT}`)
   } catch (error) {
-    throw error
+    console.error(`Error starting the server: ${error}`)
+    process.exit(1)
   }
 })
