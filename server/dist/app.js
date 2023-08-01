@@ -11,10 +11,15 @@ const cors_1 = __importDefault(require("cors"));
 const erroHandler_1 = require("./middlewares/erroHandler");
 const userRoutes_1 = require("./routes/userRoutes");
 const helmet_1 = __importDefault(require("helmet"));
+const morgan = require("morgan");
+const config_1 = __importDefault(require("./config/config"));
 dotenv_1.default.config();
 const app = (0, express_1.default)();
-const PORT = process.env.PORT || 5000;
+const PORT = config_1.default.PORT;
 db_1.default.dbOnDisconnect();
+if (config_1.default.ENABLE_MORGAN === "true") {
+    app.use(morgan("dev"));
+}
 app.use((0, helmet_1.default)());
 app.use(express_1.default.json());
 app.use(express_1.default.urlencoded({ extended: true }));

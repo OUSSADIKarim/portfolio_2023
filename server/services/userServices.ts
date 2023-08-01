@@ -10,6 +10,17 @@ export const getAllUserService = async (): Promise<UserDocument[]> => {
   }
 }
 
+export const getUserByIdService = async (
+  userId: string
+): Promise<UserDocument | null> => {
+  try {
+    const user: UserDocument | null = await User.findById(userId)
+    return user
+  } catch (error: any) {
+    throw error
+  }
+}
+
 export const createUserService = async (
   firstName: string,
   lastName: string,

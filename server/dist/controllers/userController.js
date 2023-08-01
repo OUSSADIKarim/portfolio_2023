@@ -12,9 +12,30 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.getuser = exports.getUsers = exports.createUser = void 0;
+exports.createUser = exports.getUserById = exports.getUsers = void 0;
 const createError_1 = __importDefault(require("../utils/createError"));
 const userServices_1 = require("./../services/userServices");
+const getUsers = (req, res, next) => __awaiter(void 0, void 0, void 0, function* () {
+    try {
+        const users = yield (0, userServices_1.getAllUserService)();
+        res.status(200).json(users);
+    }
+    catch (error) {
+        next(new createError_1.default(error.status, error.message));
+    }
+});
+exports.getUsers = getUsers;
+const getUserById = (req, res, next) => __awaiter(void 0, void 0, void 0, function* () {
+    const { userId } = req.params;
+    try {
+        const user = yield (0, userServices_1.getUserByIdService)(userId);
+        res.status(200).json(user || null);
+    }
+    catch (error) {
+        next(new createError_1.default(error.status, error.message));
+    }
+});
+exports.getUserById = getUserById;
 const createUser = (req, res, next) => __awaiter(void 0, void 0, void 0, function* () {
     const { firstName, lastName, email, password } = req.body;
     if (!firstName || !lastName || !email || !password) {
@@ -30,15 +51,3 @@ const createUser = (req, res, next) => __awaiter(void 0, void 0, void 0, functio
     }
 });
 exports.createUser = createUser;
-const getUsers = (req, res, next) => __awaiter(void 0, void 0, void 0, function* () {
-    try {
-        const users = yield (0, userServices_1.getAllUserService)();
-        res.status(200).json(users);
-    }
-    catch (error) {
-        next(new createError_1.default(error.status, error.message));
-    }
-});
-exports.getUsers = getUsers;
-const getuser = (req, res, next) => __awaiter(void 0, void 0, void 0, function* () { });
-exports.getuser = getuser;

@@ -14,8 +14,9 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 const mongoose_1 = __importDefault(require("mongoose"));
 const dotenv_1 = __importDefault(require("dotenv"));
+const config_1 = __importDefault(require("./config"));
 dotenv_1.default.config();
-const DB_URL = process.env.DB_URL;
+const DB_URL = config_1.default.DB_URL;
 const db = {
     dbConnection: () => __awaiter(void 0, void 0, void 0, function* () {
         try {

@@ -7,13 +7,19 @@ import csurf from "csurf"
 import { erroHandler } from "./middlewares/erroHandler"
 import { userRouter } from "./routes/userRoutes"
 import helmet from "helmet"
+import morgan = require("morgan")
+import appConfig from "./config/config"
 
 dotenv.config()
 
 const app: Express = express()
-const PORT = process.env.PORT || 5000
+const PORT = appConfig.PORT
 
 db.dbOnDisconnect()
+
+if (appConfig.ENABLE_MORGAN === "true") {
+  app.use(morgan("dev"))
+}
 
 app.use(helmet())
 app.use(express.json())
