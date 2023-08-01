@@ -26,7 +26,7 @@ app.use(
       if (whiteList.indexOf(`${origin}`) !== -1 || !origin) {
         callback(null, true)
       } else {
-        callback(new Error("Not allowed by CORS"))
+        callback(new Error("Not allowed by CORS."))
       }
     },
     optionsSuccessStatus: 204,
@@ -45,6 +45,5 @@ app.listen(PORT, () => {
     console.log(`⚡️[server]: Server is running at http://localhost:${PORT}`)
   } catch (error) {
     console.error(`Error starting the server: ${error}`)
-    process.exit(1)
   }
 })

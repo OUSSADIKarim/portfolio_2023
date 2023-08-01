@@ -1,11 +1,15 @@
+import { Document, Model } from "mongoose"
+
 interface UserDocument extends Document {
-  name: string
+  firstName: string
+  lastName: string
   email: string
   password: string
 }
 
 interface CreateUserInputs {
-  name: string
+  firstName: string
+  lastName: string
   email: string
   password: string
 }

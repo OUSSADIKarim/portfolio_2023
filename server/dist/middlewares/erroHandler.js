@@ -4,7 +4,7 @@ exports.erroHandler = void 0;
 const erroHandler = (error, req, res, next) => {
     return res.status(error.status || 500).json({
         status: error.status || 500,
-        message: error.message || "Something went wrong",
+        message: error.message || "Something went wrong.",
     });
 };
 exports.erroHandler = erroHandler;

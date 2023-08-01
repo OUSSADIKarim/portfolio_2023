@@ -26,7 +26,7 @@ app.use((0, cors_1.default)({
             callback(null, true);
         }
         else {
-            callback(new Error("Not allowed by CORS"));
+            callback(new Error("Not allowed by CORS."));
         }
     },
     optionsSuccessStatus: 204,
@@ -42,6 +42,5 @@ app.listen(PORT, () => {
     }
     catch (error) {
         console.error(`Error starting the server: ${error}`);
-        process.exit(1);
     }
 });
