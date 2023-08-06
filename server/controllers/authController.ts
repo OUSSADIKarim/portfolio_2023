@@ -3,7 +3,10 @@ import CustomError from "../utils/createError"
 import { getUserByEmailService } from "../services/userServices"
 import bcrypt from "bcrypt"
 import { generateAccessToken, generateRefreshToken } from "../utils/jwtTokens"
-import { createRefreshTokenService } from "../services/refreshTokenServices"
+import {
+  createRefreshTokenService,
+  deleteRefreshTokenService,
+} from "../services/refreshTokenServices"
 
 export const login = async (
   req: Request<{}, {}, LoginInput, {}>,
@@ -39,10 +42,14 @@ export const login = async (
     const refreshToken: string = generateRefreshToken(user._id)
     await createRefreshTokenService(user._id, refreshToken)
 
-    res.cookie("refreshToken", refreshToken, {
-      httpOnly: true,
-      maxAge: 60 * 60 * 24 * 7 * 1000, // 7days
-    })
+    res.cookie(
+      "refreshToken",
+      { refreshToken },
+      {
+        httpOnly: true,
+        maxAge: 60 * 60 * 24 * 7 * 1000, // 7days
+      }
+    )
 
     res.json({
       accessToken,
@@ -53,6 +60,36 @@ export const login = async (
         email: user.email,
       },
     })
+  } catch (error: any) {
+    next(new CustomError(error.status, error.message))
+    return
+  }
+}
+
+export const logout = async (
+  req: Request,
+  res: Response,
+  next: NextFunction
+) => {
+  const refreshCookie = req.cookies["refreshToken"]
+  console.log(refreshCookie)
+
+  if (!refreshCookie) {
+    next(new CustomError(400, "Something went wrong."))
+    return
+  }
+
+  const refreshToken = refreshCookie.refreshToken
+  if (!refreshToken) {
+    next(new CustomError(400, "Something went wrong."))
+    return
+  }
+
+  try {
+    await deleteRefreshTokenService(refreshToken)
+    res.clearCookie("refreshToken")
+    // res.clearCookie("_csrf")
+    res.status(200).json("Logged out.")
   } catch (error: any) {
     next(new CustomError(error.status, error.message))
     return

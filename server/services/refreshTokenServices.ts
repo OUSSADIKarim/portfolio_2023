@@ -15,3 +15,11 @@ export const createRefreshTokenService = async (
     throw error
   }
 }
+
+export const deleteRefreshTokenService = async (refreshToken: string) => {
+  try {
+    await RefreshToken.deleteOne({ refreshToken })
+  } catch (error) {
+    throw error
+  }
+}
