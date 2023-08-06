@@ -21,6 +21,17 @@ export const getUserByIdService = async (
   }
 }
 
+export const getUserByEmailService = async (
+  email: string
+): Promise<UserDocument | null> => {
+  try {
+    const user: UserDocument | null = await User.findOne({ email })
+    return user
+  } catch (error: any) {
+    throw error
+  }
+}
+
 export const createUserService = async (
   firstName: string,
   lastName: string,

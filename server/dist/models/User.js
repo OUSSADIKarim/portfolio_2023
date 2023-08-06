@@ -16,7 +16,7 @@ const mongoose_1 = require("mongoose");
 const validators_1 = require("../utils/validators");
 const bcrypt_1 = __importDefault(require("bcrypt"));
 const createError_1 = __importDefault(require("../utils/createError"));
-const UserSchema = new mongoose_1.Schema({
+const userSchema = new mongoose_1.Schema({
     firstName: {
         type: String,
         required: true,
@@ -46,7 +46,7 @@ const UserSchema = new mongoose_1.Schema({
         unique: true,
     },
 }, { timestamps: true });
-UserSchema.pre("save", function (next) {
+userSchema.pre("save", function (next) {
     return __awaiter(this, void 0, void 0, function* () {
         if (this.isNew) {
             try {
@@ -61,5 +61,5 @@ UserSchema.pre("save", function (next) {
         }
     });
 });
-const User = (0, mongoose_1.model)("user", UserSchema);
+const User = (0, mongoose_1.model)("user", userSchema);
 exports.default = User;

@@ -13,6 +13,7 @@ const userRoutes_1 = require("./routes/userRoutes");
 const helmet_1 = __importDefault(require("helmet"));
 const morgan = require("morgan");
 const config_1 = __importDefault(require("./config/config"));
+const authRoutes_1 = require("./routes/authRoutes");
 dotenv_1.default.config();
 const app = (0, express_1.default)();
 const PORT = config_1.default.PORT;
@@ -39,6 +40,7 @@ app.use((0, cors_1.default)({
 }));
 // app.use(csurf({ cookie: { httpOnly: true } }))
 app.use("/users", userRoutes_1.userRouter);
+app.use("/auth", authRoutes_1.authRouter);
 app.use(erroHandler_1.erroHandler);
 app.listen(PORT, () => {
     try {

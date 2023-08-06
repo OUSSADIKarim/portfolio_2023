@@ -9,6 +9,7 @@ import { userRouter } from "./routes/userRoutes"
 import helmet from "helmet"
 import morgan = require("morgan")
 import appConfig from "./config/config"
+import { authRouter } from "./routes/authRoutes"
 
 dotenv.config()
 
@@ -42,6 +43,7 @@ app.use(
 // app.use(csurf({ cookie: { httpOnly: true } }))
 
 app.use("/users", userRouter)
+app.use("/auth", authRouter)
 
 app.use(erroHandler)
 

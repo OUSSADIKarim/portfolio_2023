@@ -4,7 +4,7 @@ import bcrypt from "bcrypt"
 import CustomError from "../utils/createError"
 import { UserDocument } from "../types/user"
 
-const UserSchema: Schema = new Schema<UserDocument>(
+const userSchema: Schema = new Schema<UserDocument>(
   {
     firstName: {
       type: String,
@@ -39,7 +39,7 @@ const UserSchema: Schema = new Schema<UserDocument>(
   { timestamps: true }
 )
 
-UserSchema.pre<UserDocument>(
+userSchema.pre<UserDocument>(
   "save",
   async function (
     this: UserDocument,
@@ -58,6 +58,6 @@ UserSchema.pre<UserDocument>(
   }
 )
 
-const User = model<UserDocument>("user", UserSchema)
+const User = model<UserDocument>("user", userSchema)
 
 export default User
