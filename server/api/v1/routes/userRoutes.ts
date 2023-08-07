@@ -3,7 +3,7 @@ import {
   createUser,
   getUserById,
   getUsers,
-} from "../controllers/userController"
+} from "../../../controllers/userController"
 
 export const userRouter: Router = express.Router()
 

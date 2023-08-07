@@ -72,7 +72,6 @@ export const logout = async (
   next: NextFunction
 ) => {
   const refreshCookie = req.cookies["refreshToken"]
-  console.log(refreshCookie)
 
   if (!refreshCookie) {
     next(new CustomError(400, "Something went wrong."))

@@ -9,17 +9,16 @@ const db_1 = __importDefault(require("./config/db"));
 const cookie_parser_1 = __importDefault(require("cookie-parser"));
 const cors_1 = __importDefault(require("cors"));
 const erroHandler_1 = require("./middlewares/erroHandler");
-const userRoutes_1 = require("./routes/userRoutes");
 const helmet_1 = __importDefault(require("helmet"));
-const morgan = require("morgan");
+const morgan_1 = __importDefault(require("morgan"));
 const config_1 = __importDefault(require("./config/config"));
-const authRoutes_1 = require("./routes/authRoutes");
+const v1_1 = require("./api/v1/v1");
 dotenv_1.default.config();
 const app = (0, express_1.default)();
 const PORT = config_1.default.PORT;
 db_1.default.dbOnDisconnect();
 if (config_1.default.ENABLE_MORGAN === "true") {
-    app.use(morgan("dev"));
+    app.use((0, morgan_1.default)("dev"));
 }
 app.use((0, helmet_1.default)());
 app.use(express_1.default.json());
@@ -39,8 +38,7 @@ app.use((0, cors_1.default)({
     credentials: true,
 }));
 // app.use(csurf({ cookie: { httpOnly: true } }))
-app.use("/users", userRoutes_1.userRouter);
-app.use("/auth", authRoutes_1.authRouter);
+app.use("/api/v1", v1_1.v1Router);
 app.use(erroHandler_1.erroHandler);
 app.listen(PORT, () => {
     try {

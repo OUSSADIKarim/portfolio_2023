@@ -5,11 +5,10 @@ import cookieParser from "cookie-parser"
 import cors from "cors"
 import csurf from "csurf"
 import { erroHandler } from "./middlewares/erroHandler"
-import { userRouter } from "./routes/userRoutes"
 import helmet from "helmet"
-import morgan = require("morgan")
+import morgan from "morgan"
 import appConfig from "./config/config"
-import { authRouter } from "./routes/authRoutes"
+import { v1Router } from "./api/v1/v1"
 
 dotenv.config()
 
@@ -42,8 +41,7 @@ app.use(
 )
 // app.use(csurf({ cookie: { httpOnly: true } }))
 
-app.use("/users", userRouter)
-app.use("/auth", authRouter)
+app.use("/api/v1", v1Router)
 
 app.use(erroHandler)
 
