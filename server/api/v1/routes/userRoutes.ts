@@ -4,9 +4,10 @@ import {
   getUserById,
   getUsers,
 } from "../../../controllers/userController"
+import { verifyAccessToken } from "../../../middlewares/jwt"
 
 export const userRouter: Router = express.Router()
 
-userRouter.get("/", getUsers)
+userRouter.get("/", verifyAccessToken, getUsers)
 userRouter.get("/:userId", getUserById)
 userRouter.post("/", createUser)

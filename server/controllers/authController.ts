@@ -7,6 +7,7 @@ import {
   createRefreshTokenService,
   deleteRefreshTokenService,
 } from "../services/refreshTokenServices"
+import { LoginInput } from "../types/auth"
 
 export const login = async (
   req: Request<{}, {}, LoginInput, {}>,
