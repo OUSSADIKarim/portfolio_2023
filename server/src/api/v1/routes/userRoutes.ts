@@ -1,10 +1,10 @@
 import express, { Router } from "express"
+import { verifyAccessToken } from "../../../middlewares/jwt"
 import {
   createUser,
   getUserById,
   getUsers,
 } from "../../../controllers/userController"
-import { verifyAccessToken } from "../../../middlewares/jwt"
 
 export const userRouter: Router = express.Router()
 

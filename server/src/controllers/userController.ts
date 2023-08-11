@@ -5,7 +5,7 @@ import {
   createUserService,
   getAllUserService,
   getUserByIdService,
-} from "./../services/userServices"
+} from "../services/userServices"
 
 export const getUsers = async (
   req: Request,

@@ -14,7 +14,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.createUser = exports.getUserById = exports.getUsers = void 0;
 const createError_1 = __importDefault(require("../utils/createError"));
-const userServices_1 = require("./../services/userServices");
+const userServices_1 = require("../services/userServices");
 const getUsers = (req, res, next) => __awaiter(void 0, void 0, void 0, function* () {
     try {
         const users = yield (0, userServices_1.getAllUserService)();
