@@ -1,4 +1,4 @@
-import User from "../models/User"
+import { User } from "../models/User"
 import { UserDocument } from "../types/user"
 
 export const getAllUserService = async (): Promise<UserDocument[]> => {

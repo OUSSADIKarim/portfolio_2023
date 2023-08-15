@@ -58,6 +58,4 @@ userSchema.pre<UserDocument>(
   }
 )
 
-const User = model<UserDocument>("user", userSchema)
-
-export default User
+export const User = model<UserDocument>("user", userSchema)
